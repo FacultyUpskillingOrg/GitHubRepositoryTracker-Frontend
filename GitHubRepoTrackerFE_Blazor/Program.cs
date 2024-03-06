@@ -1,4 +1,3 @@
-using BlazorApplicationInsights;
 using GitHubRepoTrackerFE_Blazor;
 using GitHubRepoTrackerFE_Blazor.Interfaces;
 using GitHubRepoTrackerFE_Blazor.Services;
