@@ -9,12 +9,12 @@ namespace GitHubRepoTrackerFE_Blazor.Services
     {
         private readonly HttpClient _client;
         private readonly IConfiguration _configuration;
-        public ApiAuthService(HttpClient client, IConfiguration configuration)
+        private readonly ILogger<ApiAuthService> _logger;
+        public ApiAuthService(HttpClient client, IConfiguration configuration, ILogger<ApiAuthService> logger)
         {
             _client = client ?? throw new ArgumentNullException(nameof(client));
             _configuration = configuration;
-
-        
+            _logger = logger;
         }
 
         public async Task<string> GetAccessTokenAsync()
@@ -23,9 +23,9 @@ namespace GitHubRepoTrackerFE_Blazor.Services
 
             var user = new User()
             {
-                userName = _configuration.GetValue<string>("UserName"),
+                userName = _configuration.GetValue<string>("TokenUserName"),
 
-                password = _configuration.GetValue<string>("Password")
+                password = _configuration.GetValue<string>("TokenPassword")
             };
 
             var builder = new UriBuilder(_client.BaseAddress + _configuration.GetValue<string>("ApiEndpoints:GetAccessToken"));
@@ -34,19 +34,30 @@ namespace GitHubRepoTrackerFE_Blazor.Services
             var userJson = JsonConvert.SerializeObject(user);
             var data = new StringContent(userJson, Encoding.UTF8, "application/json");
 
-
-            var res = await _client.PostAsync(url, data);
-
-            if (res.IsSuccessStatusCode)
+            try
             {
+                var res = await _client.PostAsync(url, data);
+
+                if (res.IsSuccessStatusCode)
+                {
 
 
-                var result = await res.Content.ReadAsStringAsync();
-                var deserializedRes = JsonConvert.DeserializeObject<AccessToken>(result);
-                token = deserializedRes.Token;
+                    var result = await res.Content.ReadAsStringAsync();
+                    var deserializedRes = JsonConvert.DeserializeObject<AccessToken>(result);
+                    token = deserializedRes.Token;
+                    _logger.LogInformation("Token successful");
 
+
+                }
+              
 
             }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex}");
+            }
+
+           
             return token;
         }
 

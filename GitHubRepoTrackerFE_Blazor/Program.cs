@@ -1,3 +1,4 @@
+using BlazorApplicationInsights;
 using GitHubRepoTrackerFE_Blazor;
 using GitHubRepoTrackerFE_Blazor.Interfaces;
 using GitHubRepoTrackerFE_Blazor.Services;
@@ -8,7 +9,7 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddSingleton(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7270/") });
+builder.Services.AddSingleton(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["ApiBaseUrl"]) });
 builder.Services.AddSingleton<IApiAuthService, ApiAuthService>();
 builder.Services.AddSingleton<IRepoService, RepoService>();
 builder.Services.AddSingleton<ILanguageService, LanguageService>();

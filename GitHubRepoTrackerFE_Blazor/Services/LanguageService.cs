@@ -12,12 +12,13 @@ namespace GitHubRepoTrackerFE_Blazor.Services
         private readonly HttpClient _client;
         private readonly IConfiguration _configuration;
         private readonly IApiAuthService _apiAuthService;
-        public LanguageService( HttpClient httpClient, IConfiguration configuration, IApiAuthService apiAuthService)
+        private readonly ILogger _logger;
+        public LanguageService( HttpClient httpClient, IConfiguration configuration, IApiAuthService apiAuthService, ILogger<LanguageService> logger)
         {
             _client = httpClient;
             _configuration = configuration;
             _apiAuthService = apiAuthService;
-
+            _logger = logger;
         }
         public async Task<List<Language>> GetAllLanguages()
         {
@@ -76,6 +77,8 @@ namespace GitHubRepoTrackerFE_Blazor.Services
                 {
                     // handle exception
                     Console.WriteLine(ex);
+                    _logger.LogError($"Error: {ex.Message}");
+
                     break;
                 }
 
