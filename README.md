@@ -15,6 +15,14 @@ It is developed using Blazor WebAsembly.
 ## Configuration settings(appsettings.json file)
 
 ```
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
 "ApiBaseUrl": "your api base url",
   "ApiEndpoints": {
     "GetAllReposEndpoint": "The endpoint that returns all the repositories",
@@ -23,9 +31,9 @@ It is developed using Blazor WebAsembly.
     "GetAccessToken": "The endpoint that returns the access token"
   },
   "AllowedHosts": "*",
-  "AuthCredentians": {
-    "UserName": "The app username",
-    "apiPassword": "The password used to get the access token"
+  
+  "TokenUserName": "The app username",
+  "TokenPassword": "The password used to get the access token"
   }
   ```
 
