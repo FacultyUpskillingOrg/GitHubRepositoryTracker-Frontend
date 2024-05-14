@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GitHubRepoTrackerTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd1664171fb4ceac47e11eed365cfac596bcff55")]
 [assembly: System.Reflection.AssemblyProductAttribute("GitHubRepoTrackerTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GitHubRepoTrackerTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
