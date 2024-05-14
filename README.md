@@ -22,7 +22,7 @@ It is developed using Blazor WebAsembly.
       "Microsoft.AspNetCore": "Warning"
     }
   },
-  "AllowedHosts": "*",
+
 "ApiBaseUrl": "your api base url",
   "ApiEndpoints": {
     "GetAllReposEndpoint": "The endpoint that returns all the repositories",
